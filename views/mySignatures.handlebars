@@ -1,0 +1,35 @@
+<main>
+    <h1>My Signatures</h1>
+    {{#if signature}}
+        <div class="mySignatures">
+            {{#each signature}}
+                <div class="mySignaturesDiv">
+                    <h3>"{{petition_tittle}}"</h3>
+                    <img class="canvasImg" src="{{signature}}" />
+                    <a href="/signers/{{petition_name}}">See who else has signed
+                        it.</a>
+                    <form method="post">
+                        <input
+                            type="hidden"
+                            name="deletePassword"
+                            value="{{petition_name}}"
+                        />
+                        <button type="submit" value="delete">Delete</button>
+                    </form>
+                </div>
+            {{/each}}
+        </div>
+        {{#if error}}
+            <p class="error">{{error}}</p>
+        {{/if}}
+        <h3><a href="/petitions">Click here</a>
+            and check all petitions available.</h3>
+    {{else}}
+        {{#if error}}
+            <p class="error">{{error}}</p>
+        {{/if}}
+        <h3>Looks like you haven't signed any petitions yet.
+            <a href="/petitions">click here</a>
+            and check all petitions available.</h3>
+    {{/if}}
+</main>

@@ -1,0 +1,24 @@
+<main>
+    <h3>Please, tell us a little more about yourself.</h3>
+    <h2>Complete your profile here</h1>
+    <form method="post">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" value="{{age}}"/>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" value="{{city}}" />
+        <label for="homepage">Homepage:</label>
+        <input type="text" id="homepage" name="homepage" value="{{homepage}}" />
+        <label for="managers">How many times have you asked to talk to the manager
+            in the past month?</label>
+        <input type="number" id="managers" name="managers" value="{{managers}}" />
+        {{#if error}}
+            <p class="error">{{error}}</p>
+        {{/if}}
+        <button type="submit" value="save">Save</button>
+    </form>
+    <div class="linkNext">
+        <p>Do you prefer to complete your profile later?</p>
+        <a href="/petitions">Skip it here</a>
+    </div>
+</main>
+    

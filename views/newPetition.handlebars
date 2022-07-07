@@ -1,0 +1,16 @@
+<main>
+    <div class="petitionHeader">
+        <img class="petitionImg" src={{image}} />
+        <h2>{{petitionTittle}}</h2>
+        <h3>{{description}}</h3>
+    </div>
+    <form method="post">
+        <input type="hidden" id="signature" name="signature" />
+        <canvas id="signCanvas" width="500px" height="150px"></canvas>
+        {{#if error}}
+            <p class="error">{{error}}</p>
+        {{/if}}
+        <button type="button" id="clear">Clear Signature</button>
+        <button type="submit" value="Submit">Submit Signature</button>
+    </form>
+</main>

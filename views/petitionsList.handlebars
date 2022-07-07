@@ -1,0 +1,11 @@
+<main>
+
+    <h1>Petitions</h1>
+    <h3>Here you can find all petitions currently available in our portal, and
+        add your support</h3>
+    <ul class="petitionsList">
+        {{#each petitions}}
+            <li><a href="/petitions/{{name}}">{{tittle}}</a></li>
+        {{/each}}
+    </ul>
+</main>

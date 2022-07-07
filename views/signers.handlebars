@@ -1,0 +1,26 @@
+<main>
+    <div class="listByCity">
+        <h1>List of Karens who also support</h1>
+    </div>
+    <h3>"{{petition_tittle}}"</h3>
+    <ul>
+        {{#each signers}}
+            <li>
+                {{#if homepage}}
+                    <a href={{homepage}}>{{first_name}}
+                        {{last_name}}</a>
+                {{else}}
+                    {{first_name}}
+                    {{last_name}}
+                {{/if}}
+                {{#if age}},
+                    {{age}}
+                {{/if}}
+                {{#if city}}
+                    <a href="/signers/{{petition_name}}/{{city}}">
+                        -
+                        {{city}}</a>
+                {{/if}}</li>
+        {{/each}}
+    </ul>
+</main>

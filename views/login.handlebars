@@ -1,0 +1,16 @@
+<main>
+    <form method="post">
+        <label for="eMail">E-mail:</label>
+        <input type="email" attribute='id="eMail"' name="eMail" required />
+        <label for="password">password:</label>
+        <input type="password" id="password" name="password" required />
+        {{#if error}}
+            <p class="error">{{error}}</p>
+        {{/if}}
+        <button type="submit" value="login">Login</button>
+    </form>
+    <div class="linkNext">
+        <p>Not registered?</p>
+        <a href="/register">Register here</a>
+    </div>
+</main>

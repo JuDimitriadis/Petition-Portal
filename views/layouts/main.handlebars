@@ -1,0 +1,42 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{tittle}}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+            rel="stylesheet"
+        />
+
+        {{{customstyle}}}
+    </head>
+    <body>
+        <header>
+            <img class="karen" src="/karen_coin.jpeg" />
+            <h1>Karen's Petition Portal</h1>
+            <img class="menuIcon" id="menuIcon" src="/menu.png" />
+        </header>
+        {{{body}}}
+        {{{script}}}
+    </body>
+    <aside>
+        <div id="shadow">
+            <nav id="menuBar">
+                <menu>
+                    <li class="menuBtns"><a href="/petitions">Petitions</a></li>
+                    <li class="menuBtns"><a href="/my-signatures">My Signatures</a></li>
+                    <li class="menuBtns"><a href="/my-account">My Account</a></li>
+                    <li class="menuBtns"><a href="/logout">Log Out</a></li>
+                </menu>
+                <p id="x">X</p>
+            </nav>
+        </div>
+        <script src="/scriptMenu.js"></script>
+    </aside>
+    <footer>
+        <p>&copy; 2022 Karen GmbH</p>
+    </footer>
+</html>
