@@ -1,25 +1,32 @@
-# [Karen's Petition Portal](https://karenspetitionportal.herokuapp.com/)
+# Karen's Petition Portal
 ![Karen's Portal Logo](https://auspic.s3.eu-central-1.amazonaws.com/7sI1K2aHlgCjKk91XqVV.jpeg) 
 
-This page is a petition portal inspired by the meme Karen, where every Karen can register, check available petitions and sign it. Users can also check who else has signed it, edit their profile, change password and, delete signatures.
+This page is a petition portal inspired by the meme Karen, where every Karen can register, check available petitions, and sign them. Users can also check who else has signed it, edit their profile, change passwords and delete signatures.
 
-### Requirements
+Click *[here](https://karenspetitionportal.herokuapp.com/)* to check the live page.
 
-**Logeded Out User**
+## Functionalities
 
-- User is redirect to Register page
-- Register page must have a *Login here* button to redirect user to login page
+- Register/Login page;
+- Slide in Menu bar;
+- Petitions: show all petitions available to sign;
+- Signing: show Title, description, and field to allow the user to sign it 
+- My signatures: show the Title and signature image from all signed petitions. Users can also delete signatures from this page
+- My account: shows user profile information and allows users to edit their profile and change passwords.
+- List of signers: user can see a list of everyone who has also signed a petition, with *Name, age, and City*. It also allows the user to open a second list filtered by City.
 
-**Logeded In User**
+## Tecnology
 
-- User must be able to acess a menu bar with the option *Petitions, My Signatures, My Account and Log Out* from every page
-- After log in show page with a list of links of avaible petitions
-- When clicked, user should be redirected to the selected petition page with full description and signing box.
-- When a new Signarute is submit validates if:
-  - Field was not blank
-  - User has not signed this petition before
-- If signature was complete succesfully, user must be redirected to a page with a *Thank you* message, image of the signature and link to access the signatures list
-- When the signature link is clicked, user must be redirected to a page with a list of all signers, with Name, age and, City. In case the user has add a webpage address to its profile, the Name field must be a link to this webpage and the City field must be a link to check a list of signers by city.
+<img alt="JavaScript" src="https://simpleicons.org/icons/javascript.svg" width=80 heigth=80> &nbsp;&nbsp;&nbsp;&nbsp; <img alt="Node.js" src="https://simpleicons.org/icons/nodedotjs.svg" width=80 heigth=80> &nbsp;&nbsp;&nbsp;&nbsp; <img alt="Express.js" src="https://simpleicons.org/icons/express.svg" width=80 heigth=80> &nbsp;&nbsp;&nbsp;&nbsp; <img alt="Handlebars" src="https://simpleicons.org/icons/handlebarsdotjs.svg" width=80 heigth=80> &nbsp;&nbsp;&nbsp;&nbsp; <img alt="PostgreSQL" src="https://simpleicons.org/icons/postgresql.svg" width=80 heigth=80>
+
+## Preview
+
+
+
+
+
+   
+
 
 
 
