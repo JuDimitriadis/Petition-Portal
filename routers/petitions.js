@@ -1,11 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const middleware = require("../middleware.js");
-const database = require("../database/database");
+const middleware = require('../middleware.js');
+const database = require('../database/database');
 
-router.get("/petitions", middleware.checkLogin, (req, res) => {
+router.get('/petitions', middleware.checkLogin, (req, res) => {
     database.getPetitions().then((result) => {
-        res.render("petitionsList", {
+        res.render('petitionsList', {
             tittle: "Karen's Petition Portal",
             customstyle: '<link rel="stylesheet" href="/style.css">',
             script: '<script src="/script.js"></script>',
@@ -14,11 +14,11 @@ router.get("/petitions", middleware.checkLogin, (req, res) => {
     });
 });
 
-router.get("/petitions/:name", middleware.checkLogin, (req, res) => {
+router.get('/petitions/:name', middleware.checkLogin, (req, res) => {
     database
         .getPetitions(req.params.name)
         .then((result) => {
-            res.render("newPetition", {
+            res.render('newPetition', {
                 tittle: "Karen's Petition Portal - Sign here",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 script: '<script src="/script.js"></script>',
@@ -28,19 +28,19 @@ router.get("/petitions/:name", middleware.checkLogin, (req, res) => {
             });
         })
         .catch((error) => {
-            console.log("ERRO GET /petition:name", error);
-            return res.redirect("/petitions");
+            console.log('ERRO GET /petition:name', error);
+            return res.redirect('/petitions');
         });
 });
 
-router.post("/petitions/:name", middleware.checkLogin, (req, res) => {
+router.post('/petitions/:name', middleware.checkLogin, (req, res) => {
     let petition;
 
     database
         .getPetitions(req.params.name)
         .then((results) => {
             petition = results;
-            if (req.body.signature === "") {
+            if (req.body.signature === '') {
                 return null;
             }
             return database.newSignature(
@@ -52,8 +52,8 @@ router.post("/petitions/:name", middleware.checkLogin, (req, res) => {
         })
         .then((result) => {
             if (!result) {
-                res.render("newPetition", {
-                    error: "Please sign before continue",
+                res.render('newPetition', {
+                    error: 'Please sign before continue',
                     tittle: "Karen's Petition Portal - Sign here",
                     customstyle: '<link rel="stylesheet" href="/style.css">',
                     script: '<script src="/script.js"></script>',
@@ -63,9 +63,9 @@ router.post("/petitions/:name", middleware.checkLogin, (req, res) => {
                 });
                 return;
             }
-            if (result.signed === "yes") {
-                res.render("newPetition", {
-                    error: "Ops, looks like you have already signed this petition",
+            if (result.signed === 'yes') {
+                res.render('newPetition', {
+                    error: 'Ops, looks like you have already signed this petition',
                     tittle: "Karen's Petition Portal - Sign here",
                     customstyle: '<link rel="stylesheet" href="/style.css">',
                     script: '<script src="/script.js"></script>',
@@ -78,19 +78,19 @@ router.post("/petitions/:name", middleware.checkLogin, (req, res) => {
             res.redirect(`/thank-you/${req.params.name}`);
         })
         .catch((error) => {
-            console.log("Get Petition/:name ERROR", error);
-            return res.redirect("/petitions");
+            console.log('Get Petition/:name ERROR', error);
+            return res.redirect('/petitions');
         });
 });
 
-router.get("/thank-you/:name", middleware.checkLogin, (req, res) => {
+router.get('/thank-you/:name', middleware.checkLogin, (req, res) => {
     database
         .getThankYouData(req.session.id, req.params.name)
         .then((result) => {
             if (result === null) {
                 res.redirect(`/petitions/${req.params.name}`);
             }
-            res.render("thank-you", {
+            res.render('thank-you', {
                 tittle: "Karen's Petition Portal - Thank You!",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 name: result.firstName,
@@ -101,7 +101,7 @@ router.get("/thank-you/:name", middleware.checkLogin, (req, res) => {
             });
         })
         .catch((error) => {
-            console.log("Get Thank you error", error);
+            console.log('Get Thank you error', error);
             res.redirect(`/petitions/${req.params.name}`);
         });
 });

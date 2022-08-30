@@ -1,21 +1,21 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const middleware = require("../middleware.js");
-const database = require("../database/database");
+const middleware = require('../middleware.js');
+const database = require('../database/database');
 
-router.get("/profile", middleware.checkLogin, (req, res) => {
-    res.render("profile", {
+router.get('/profile', middleware.checkLogin, (req, res) => {
+    res.render('profile', {
         tittle: "Karen's Petition Portal - Profile",
         customstyle: '<link rel="stylesheet" href="/style.css">',
     });
 });
 
-router.post("/profile", middleware.checkLogin, (req, res) => {
+router.post('/profile', middleware.checkLogin, (req, res) => {
     const { age, city, managers, homepage } = req.body;
     if (homepage) {
-        if (!homepage.startsWith("http")) {
-            res.render("profile", {
-                error: "Ops, invalid homepage address. Please check you data and try again",
+        if (!homepage.startsWith('http')) {
+            res.render('profile', {
+                error: 'Ops, invalid homepage address. Please check you data and try again',
                 tittle: "Karen's Petition Portal - Profile",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 age: age,
@@ -28,9 +28,9 @@ router.post("/profile", middleware.checkLogin, (req, res) => {
     }
 
     if (age < 18) {
-        if (!homepage.startsWith("http")) {
-            res.render("profile", {
-                error: "Sorry! You must be over 18 to sign this petition",
+        if (!homepage.startsWith('http')) {
+            res.render('profile', {
+                error: 'Sorry! You must be over 18 to sign this petition',
                 tittle: "Karen's Petition Portal - Profile",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 age: age,
@@ -43,9 +43,9 @@ router.post("/profile", middleware.checkLogin, (req, res) => {
     }
 
     if (managers <= 0) {
-        if (!homepage.startsWith("http")) {
-            res.render("profile", {
-                error: "Ops, invalid data! Please check your data and try again",
+        if (!homepage.startsWith('http')) {
+            res.render('profile', {
+                error: 'Ops, invalid data! Please check your data and try again',
                 tittle: "Karen's Petition Portal - Profile",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 age: age,
@@ -60,12 +60,12 @@ router.post("/profile", middleware.checkLogin, (req, res) => {
     database
         .updateProfile(age, city, homepage, managers, req.session.id)
         .then(() => {
-            return res.redirect("/petitions");
+            return res.redirect('/petitions');
         })
         .catch((error) => {
-            console.log("ERROR POST /profile", error);
-            res.render("profile", {
-                error: "Ops, something went wrong! Please check your data and try again.",
+            console.log('ERROR POST /profile', error);
+            res.render('profile', {
+                error: 'Ops, something went wrong! Please check your data and try again.',
                 tittle: "Karen's Petition Portal - Profile",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 age: age,
@@ -76,35 +76,35 @@ router.post("/profile", middleware.checkLogin, (req, res) => {
         });
 });
 
-router.get("/my-account", middleware.checkLogin, (req, res) => {
+router.get('/my-account', middleware.checkLogin, (req, res) => {
     database
         .getUserAndProfileByID(req.session.id)
         .then((result) => {
-            res.render("myAccount", {
+            res.render('myAccount', {
                 tittle: "Karen's Petition Portal - My Account",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 data: result,
             });
         })
         .catch((error) => {
-            console.log("ERROR GET /my-account: ", error);
-            res.redirect("/");
+            console.log('ERROR GET /my-account: ', error);
+            res.redirect('/');
         });
 });
 
-router.post("/my-account", middleware.checkLogin, (req, res) => {
+router.post('/my-account', middleware.checkLogin, (req, res) => {
     const { age, homepage, city, managers, firstName, lastName, eMail } =
         req.body;
 
     if (homepage) {
-        if (!homepage.startsWith("http")) {
+        if (!homepage.startsWith('http')) {
             database.getUserAndProfileByID(req.session.id).then((result) => {
-                res.render("myAccount", {
+                res.render('myAccount', {
                     tittle: "Karen's Petition Portal - My Account",
                     customstyle: '<link rel="stylesheet" href="/style.css">',
                     data: result,
                     edit: req.body.edit,
-                    error: "Ops, invalid homepage address. Please check you data and try again",
+                    error: 'Ops, invalid homepage address. Please check you data and try again',
                 });
             });
             return;
@@ -112,24 +112,24 @@ router.post("/my-account", middleware.checkLogin, (req, res) => {
     }
     if (age < 18) {
         database.getUserAndProfileByID(req.session.id).then((result) => {
-            res.render("myAccount", {
+            res.render('myAccount', {
                 tittle: "Karen's Petition Portal - My Account",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 data: result,
                 edit: req.body.edit,
-                error: "Sorry! You must be over 18 to sign this petition",
+                error: 'Sorry! You must be over 18 to sign this petition',
             });
         });
         return;
     }
     if (managers <= 0) {
         database.getUserAndProfileByID(req.session.id).then((result) => {
-            res.render("myAccount", {
+            res.render('myAccount', {
                 tittle: "Karen's Petition Portal - My Account",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 data: result,
                 edit: req.body.edit,
-                error: "Ops, invalid data! Please check your data and try again",
+                error: 'Ops, invalid data! Please check your data and try again',
             });
         });
         return;
@@ -137,7 +137,7 @@ router.post("/my-account", middleware.checkLogin, (req, res) => {
 
     if (req.body.edit) {
         database.getUserAndProfileByID(req.session.id).then((result) => {
-            res.render("myAccount", {
+            res.render('myAccount', {
                 tittle: "Karen's Petition Portal - My Account",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 data: result,
@@ -148,7 +148,7 @@ router.post("/my-account", middleware.checkLogin, (req, res) => {
     }
     if (req.body.editPassword) {
         database.getUserAndProfileByID(req.session.id).then((result) => {
-            res.render("myAccount", {
+            res.render('myAccount', {
                 tittle: "Karen's Petition Portal - My Account",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 data: result,
@@ -164,21 +164,21 @@ router.post("/my-account", middleware.checkLogin, (req, res) => {
                 database
                     .getUserAndProfileByID(req.session.id)
                     .then((result) => {
-                        res.render("myAccount", {
+                        res.render('myAccount', {
                             tittle: "Karen's Petition Portal - My Account",
                             customstyle:
                                 '<link rel="stylesheet" href="/style.css">',
                             data: result,
-                            passwordMsg: "Your password has been updated.",
+                            passwordMsg: 'Your password has been updated.',
                         });
                     });
             })
             .catch((error) => {
-                console.log("ERROR updating password: ", error);
-                res.render("myAccount", {
+                console.log('ERROR updating password: ', error);
+                res.render('myAccount', {
                     tittle: "Karen's Petition Portal - My Account",
                     customstyle: '<link rel="stylesheet" href="/style.css">',
-                    passwordMsg: "Ops, something went wrong! Please try again",
+                    passwordMsg: 'Ops, something went wrong! Please try again',
                 });
             });
         return;
@@ -193,7 +193,7 @@ router.post("/my-account", middleware.checkLogin, (req, res) => {
                     return database.getUserAndProfileByID(req.session.id);
                 })
                 .then((result) => {
-                    res.render("myAccount", {
+                    res.render('myAccount', {
                         tittle: "Karen's Petition Portal - My Account",
                         customstyle:
                             '<link rel="stylesheet" href="/style.css">',
@@ -201,44 +201,44 @@ router.post("/my-account", middleware.checkLogin, (req, res) => {
                     });
                 })
                 .catch((error) => {
-                    console.log("ERROR UPDATING ACCOUNT: ", error);
-                    res.render("myAccount", {
+                    console.log('ERROR UPDATING ACCOUNT: ', error);
+                    res.render('myAccount', {
                         tittle: "Karen's Petition Portal - My Account",
                         customstyle:
                             '<link rel="stylesheet" href="/style.css">',
-                        error: "Ops, something went wrong! Please, try again.",
+                        error: 'Ops, something went wrong! Please, try again.',
                     });
                 });
         })
         .catch((error) => {
-            console.log("ERROR POST /my-account: ", error);
-            res.redirect("/my-account");
+            console.log('ERROR POST /my-account: ', error);
+            res.redirect('/my-account');
         });
 });
 
-router.get("/my-signatures", middleware.checkLogin, (req, res) => {
+router.get('/my-signatures', middleware.checkLogin, (req, res) => {
     database
         .getSignaturesById(req.session.id)
         .then((result) => {
-            res.render("mySignatures", {
+            res.render('mySignatures', {
                 tittle: "Karen's Petition Portal - My Signatures",
                 customstyle: '<link rel="stylesheet" href="/style.css">',
                 signature: result,
             });
         })
         .catch((error) => {
-            console.log("ERROR GET /my-account: ", error);
-            res.redirect("/");
+            console.log('ERROR GET /my-account: ', error);
+            res.redirect('/');
         });
 });
 
-router.post("/my-signatures", middleware.checkLogin, (req, res) => {
+router.post('/my-signatures', middleware.checkLogin, (req, res) => {
     database
         .deleteSignature(req.body.deletePassword, req.session.id)
-        .then(() => res.redirect("/my-signatures"))
+        .then(() => res.redirect('/my-signatures'))
         .catch((error) => {
-            console.log("ERROR DELETING SIGNATURA", error);
-            res.redirect("/my-signaturas");
+            console.log('ERROR DELETING SIGNATURA', error);
+            res.redirect('/my-signaturas');
         });
 });
 module.exports = router;
